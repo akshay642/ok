@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>2090 Business Canvas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #FFD700, #FF6347);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            animation: slide-up 0.5s ease-in-out;
+        }
+
+        @keyframes slide-up {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1, p {
+            color: #4caf50;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s, transform 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border: 1px solid #4caf50;
+            transform: scale(1.02);
+        }
+
+        .submit-button {
+            background: #4caf50;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background: #45a049;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>2090</h1>
+            <p>INNOVATE-2-SUSTAIN</p>
+            <p>Business canvas</p>
+        </div>
+
+        <form method="post" action="" name="product" id="product">
+            <label for="team-number">Team Number*</label>
+            <input type="text" id="team-number" name="team-number" placeholder="Enter Number" required>
+
+            <label for="customer-segments">Customer Segments</label>
+            <input type="text" id="customer-segments" name="customer-segments" placeholder="Enter Customer Segments" required>
+
+            <label for="value-propositions">Value Propositions</label>
+            <input type="text" id="value-propositions" name="value-propositions" placeholder="Enter Value Propositions" required>
+
+            <label for="channels">Channels</label>
+            <input type="text" id="channels" name="channels" placeholder="Enter Channels" required>
+
+            <label for="customer-relationships">Customer Relationships</label>
+            <input type="text" id="customer-relationships" name="customer-relationships" placeholder="Enter Customer Relationships" required>
+
+            <label for="revenue-streams">Revenue Streams</label>
+            <input type="text" id="revenue-streams" name="revenue-streams" placeholder="Enter Revenue Streams" required>
+
+            <label for="key-resources">Key Resources</label>
+            <input type="text" id="key-resources" name="key-resources" placeholder="Enter Key Resources" required>
+
+            <label for="key-activities">Key Activities</label>
+            <input type="text" id="key-activities" name="key-activities" placeholder="Enter Key Activities" required>
+
+            <label for="key-partnerships">Key Partnerships</label>
+            <input type="text" id="key-partnerships" name="key-partnerships" placeholder="Enter Key Partnerships" required>
+
+            <label for="cost-structure">Cost Structure</label>
+            <input type="text" id="cost-structure" name="cost-structure" placeholder="Enter Cost Structure" required>
+
+            <button class="submit-button" id="submitBtn">Submit &#10132;</button>
+        </form>
+    </div>
+
+    <!-- Modal dialog for the thank you message -->
+    <div class="modal" id="thankYouModal">
+        <div class="modal-content">
+            <p style="font-weight: bold; color: green;">Thank you! Your form is submitted successfully.</p>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxQYOQst_15VgpYOpeRClVifLDyR_Gsp2sC00hHjgHj8tpmG9fSNrHltseJSoJFKVPG/exec'
+        const form = document.forms['product'];
+        const submitBtn = document.getElementById('submitBtn');
+        const thankYouModal = document.getElementById('thankYouModal');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    openModal(); // Show the modal dialog
+                    form.reset(); // Optionally, reset the form fields
+                })
+                .catch(error => console.error('Error!', error.message));
+        });
+
+        function openModal() {
+            thankYouModal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            thankYouModal.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
